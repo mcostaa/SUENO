@@ -1,0 +1,110 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #3D2B56;
+  margin: 0;
+}
+
+/* Elementos .header, .column, .column.side, .row, @media screen y .footer fueron tomados de W3 School — CSS Website Layout */
+.header {
+  background-color: #242142;
+  padding: 180px;
+  text-align: center;
+}
+
+.column {
+  float: left;
+  padding: 0px;
+}
+
+/* La idea es insertar las imágenes de los 'monstruos' del juego en las columnas laterales. No importa el margen del texto porque no va a haber texto en esta parte */
+.column.side {
+  width: 25%;
+  text-align: center;
+}
+
+/* En esta columna agregar datos sobre el sueño */
+.column.middle {
+  width: 50%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+
+.footer {
+  background-color: #242142;
+  margin-top: 80px;
+  padding: 10px;
+  text-align: center;
+}
+
+#gráficos {
+  align-content: center;
+  width: 100%;
+  height: 400px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+/*secciones para cada grafico*/
+
+section {
+    width: 22.96%;
+    height: 400px;
+    margin: 10px;
+    float: left;
+    text-align: center;
+   }
+
+
+
+h1 {
+	color: #A1CC8F;
+	font-family: 'Press Start 2P', cursive;
+}
+
+h2 {
+	color: #8B809E;
+	font-family: 'Press Start 2P', cursive;
+}
+
+h3 {
+	color: #A1CC8F;
+	font-family: 'Press Start 2P', cursive;
+
+}
+
+h4 {
+  color: #A1CC8F;
+  font-family: 'Press Start 2P', cursive;
+padding-top: 100px;
+}
+
+p {
+	color: #8B809E;
+font-family: 'Roboto Mono', monospace;
+padding-right: 30px;
+}
+
+a{
+  color: #A1CC8F;
+  font-family: 'Press Start 2P', cursive;
+  float: left;
+  margin-top: 20px;
+}
+</style>

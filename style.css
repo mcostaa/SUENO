@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@500&display=swap");
+
+.true-bg {
+  background-image: url("img/realbgforreal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  background-image: url("img/fondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.boton:hover {
+  /* La sombra de esta png la saque de "https://stackoverflow.com/a/23130537" -->*/
+  -webkit-filter: drop-shadow(10px 10px 7px #fab107);
+  filter: drop-shadow(10px 10px 10px #fab107);
+}
+#intro {
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  font-size: 30px;
+  text-align: center;
+  width: 945px;
+  padding-left: 150px;
+}
+
+#time {
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-size: 40px;
+  line-height: auto;
+  z-index: 2;
+  margin: 0;
+}
+
+.container {
+  padding-top: 10em;
+  text-align: center;
+  padding-bottom: 5em;
+  background-repeat: no-repeat;
+  background-size: auto 700px;
+  width: 1245px;
+  height: 700px;
+}
+
+.game-bg {
+  background-image: url("img/fondo.png");
+  background-repeat: no-repeat;
+  background-size: auto 700px;
+  height: 700px;
+  z-index: 0;
+}
+
+.game-overlay {
+  background-size: auto 700px;
+  height: 700px;
+  width: 1245px;
+  z-index: 1;
+  position: absolute;
+}

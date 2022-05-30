@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title></title>
+  </head>
+  <body>
+    <div class="true-bg">
+      <div class="game-bg">
+        <div id="overlay" class="game-overlay"></div>
+        <p id="time">tiempo</p>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="text/javascript">
+      //tiempo entre 30 minutos de juego
+      let timeBetweenTimeUpdates = 5000;
+      //tiempo entre cada estimulo
+      let timeBetweenOverlayUpdates = 2000;
+
+      const overlayOffset = $(".game-bg").position();
+      // hitbox de los overlays (Posiciones de los objetos en la pantalla)
+      let overlays = [
+        {
+          file: "afuera.png",
+          x1: 800,
+          y1: 0,
+          x2: 910,
+          y2: 250
+        },
+        {
+          file: "luz.png",
+          x1: 600,
+          y1: 20,
+          x2: 765,
+          y2: 200
+        },
+        {
+          file: "cel.png",
+          x1: 870,
+          y1: 310,
+          x2: 900,
+          y2: 360
+        },
+        {
+          file: "gato.png",
+          x1: 580,
+          y1: 450,
+          x2: 730,
+          y2: 620
+        },
+        {
+          file: "mail.png",
+          x1: 210,
+          y1: 310,
+          x2: 310,
+          y2: 440
+        },
+        {
+          file: "profe.png",
+          x1: 1100,
+          y1: 210,
+          x2: 1240,
+          y2: 370
+        }
+      ];
+
+      let overlay = null;
+
+      // Reloj del juego
+      let hour = 23;
+      let minute = 0;
+
+      //determinador de AM o PM en el reloj de juego
+      let timeText = function (hour, minute) {
+        if (hour < 12) {
+          if (hour === 0) {
+            hour = 12;
+          }
+          if (minute < 10) {
+            return `${hour}:0${minute} AM`;
+          } else {
+            return `${hour}:${minute} AM`;
+          }
+        } else if (hour < 24) {
+          if (hour === 0) {
+            hour = 12;
+          }
+          if (minute < 10) {
+            return `${hour - 12}:0${minute} PM`;
+          } else {
+            return `${hour - 12}:${minute} PM`;
+          }
+        } else {
+          return "¡Ayudame!";
+        }
+      };
+
+      //ir cambiando la hora en incrementos de 30 mins (11 segundos en la vida real)
+      let incrementTime = function () {
+        minute = minute + 30;
+        if (minute >= 60) {
+          hour = hour + 1;
+          minute = 0;
+        }
+        if (hour > 23) {
+          hour = 0;
+        }
+      };
+
+      $("#time").html(timeText(hour, minute));
+
+      let update = function () {
+        incrementTime();
+        $("#time").html(timeText(hour, minute));
+
+        // Fin del juego. A las 7 AM hay una alerta y te lleva a la siguiente pagina
+        if (hour === 7) {
+          alert("¡Buenos dias!¡Lograste que Matt durmiera 8 horas sin ser despertado!");
+          window.location = "info.html";
+        }
+        setTimeout(update, timeBetweenTimeUpdates);
+      };
+
+      setTimeout(update, timeBetweenTimeUpdates);
+
+      //randomizador de estimulos que aparecen en la pantalla
+      let overlayLoop = function () {
+        let overlayN = Math.floor(Math.random() * 6);
+
+        $("#overlay").css({
+          backgroundImage: `url("img/overlays/${overlays[overlayN].file}")`
+        });
+
+        overlay = overlays[overlayN];
+      };
+
+      setTimeout(overlayLoop, timeBetweenOverlayUpdates);
+
+      //funcion para hacer click en los overlays
+      $(".game-bg").on("click", function (event) {
+        if (overlay != null) {
+          const cursorX = event.clientX - overlayOffset.left;
+          const cursorY = event.clientY - overlayOffset.top;
+          const clickIsWithinOverlayObjectX =
+            cursorX >= overlay.x1 && cursorX <= overlay.x2;
+          const clickIsWithinOverlayObjectY =
+            cursorY >= overlay.y1 && cursorY <= overlay.y2;
+          // If they click on the overlay object
+          if (clickIsWithinOverlayObjectX && clickIsWithinOverlayObjectY) {
+            $("#overlay").css({
+              backgroundImage: "none"
+            });
+            overlay = null;
+            setTimeout(overlayLoop, timeBetweenOverlayUpdates);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
